@@ -33,7 +33,7 @@ parse_core <- function(response){
 #' @export 
 parse_odds <- function(response){
   
-  if(length(response$odds$data) == 0){return(tibble(game_id = response$id[[1]]))}
+  if(length(response$odds$data) == 0){return(tibble::tibble(game_id = response$id[[1]]))}
   
   out <- response$odds %>% 
     tibble::as_tibble(.) %>%
@@ -62,7 +62,7 @@ parse_odds <- function(response){
 
 #' @export 
 parse_lineups <- function(data){
-  if(length(data$lineup$data) == 0){return(tibble(game_id = data$id))}
+  if(length(data$lineup$data) == 0){return(tibble::tibble(game_id = data$id))}
   
   data$lineup[[1]] %>% 
     purrr::map_dfr(~{.x %>% rlist::list.flatten() %>% purrr::compact() %>% dplyr::bind_cols()}) %>% 
