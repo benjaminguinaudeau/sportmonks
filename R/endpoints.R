@@ -165,9 +165,9 @@ get_tv <- function(game_id, parse = T, ...){
 
 #' @export 
 get_fixture_year <- function(year){
-  out <- get_fixtures(year = year, parse = F) %>% 
+  out <- get_fixtures(year = year, parse = F) %>%
     purrr::map_dfr(~{
-      tibble::tibble(game_id = .x[["id"]], date = .x[["time"]][["starting_at"]][["date"]])
+      tibble::tibble(game_id = .x[["id"]], league_id = .x[["league_id"]], date = .x[["time"]][["starting_at"]][["date"]])
     })
   
   return(out)
